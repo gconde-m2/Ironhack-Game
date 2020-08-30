@@ -21,12 +21,12 @@ class Character {
 
     this.velY = 1;
     this.gravity = 0.4;
-
+    this.velX = 10;
 
     this.keys = keys;
 
     this.bullets = [];
-    this.pos = 0
+    this.pos = 1  //cambio direccion imagen bullet
     this.afterJump = 0
     this.setListeners();
 
@@ -87,10 +87,15 @@ class Character {
               this.image.frames = 2;
               this.image.src = "./images/JumpLeft.png";
               this.jump();
+              document.addEventListener("keypress" ,e => {
+
+                this.posX -= this.velX;
+                this.posX -= 30
+              })
 
             }
             else if (this.pos == 1) {
-
+              this.posX += this.velX;
               this.image.frames = 2;
               this.image.src = "./images/JumpRight.png"
               this.jump()
@@ -127,7 +132,7 @@ class Character {
           this.pos = 2
           this.image.frames = 8;
           this.image.src = "./images/runLeft.png";
-          this.posX -= 25
+          this.posX -= 30
           document.addEventListener("keyup", e => {
             if (this.posY == this.posY0) {
               this.image.src = "./images/IdleLeft.png";
@@ -140,13 +145,14 @@ class Character {
           this.pos = 1
           this.image.frames = 8;
           this.image.src = "./images/RunRigth.png";
-          this.posX += 25
+          this.posX += 30
           document.addEventListener("keyup", e => {
             if (this.posY == this.posY0) {
               this.image.src = "./images/IdleRigth.png";
               this.image.frames = 4;
             }
           });
+
           break
           
       }
@@ -155,12 +161,16 @@ class Character {
   }
 
   jump() {
+    this.posX += this.velX;
     this.posY -= 70;
     this.velY -= 8;
+    this.velY += this.gravity;
+    if (this.posY >= this.playerPosY0 + this.playerHeight) {
+        this.velY *= -1;
   }
-
+  }
   shoot() {
-    this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width, this.height));
+    this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width, this.height,this.pos));
   }
 
   clearBullets() {
