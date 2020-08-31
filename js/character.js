@@ -1,14 +1,14 @@
 class Character {
 
-  constructor(ctx, gameW, gameH, keys) {
+  constructor(ctx, gameW, gameH, keys,obstacles) {
 
     this.ctx = ctx;
 
     this.gameWidth = gameW;
     this.gameHeight = gameH;
-
-    this.width = 700;
-    this.height = 700;
+    this.obstacles = obstacles
+    this.width = 500;
+    this.height = 500;
 
     this.image = new Image();
     this.image.src = "./images/IdleRigth.png";
@@ -16,24 +16,24 @@ class Character {
     this.image.framesIndex = 2;
 
     this.posX = 20;
-    this.posY = this.gameHeight - this.height + 200;
+    this.posY = this.gameHeight - this.height + 70;
     this.posY0 = this.posY;
 
     this.velY = 1;
     this.gravity = 0.4;
-    this.velX = 10;
+    this.velX = 5;
 
     this.keys = keys;
-
+    this.posAttack = 1
     this.bullets = [];
-    this.pos = 1  //cambio direccion imagen bullet
+    this.pos = 0  //cambio direccion imagen bullet
     this.afterJump = 0
     this.setListeners();
-
+    this.state = 0
   }
 
   draw(framesCounter) {
-
+  
     this.ctx.drawImage(
       this.image,
       this.image.framesIndex * Math.floor(this.image.width / this.image.frames),
@@ -80,7 +80,7 @@ class Character {
       switch (e.keyCode) {
         //SALTO HACIA LOS DOS LADOS------------
         case this.keys.top:
-          if (this.posY >= this.posY0) {
+          if (this.posY >= this.posY0 || this.velY == 0 ) {
 
             if (this.pos == 2) {
               this.afterJump = 2
@@ -115,41 +115,51 @@ class Character {
           break;
         //ATAQUE HACIA LOS DOS LADOS-----------
         case this.keys.space:
-          if (this.pos == 2) {
+          if (this.posAttack == 2) {
             this.image.frames = 4;
             this.image.src = "./images/AttackLeft.png";
             this.shoot();
+           
+            break
           }
-          else if (this.pos == 1) {
+          else if (this.posAttack == 1) {
             this.image.frames = 4;
             this.image.src = "./images/AttackRight.png";
             this.shoot();
+          
+            break;
           }
 
-          break;
+          
         //MOVIMIENTO IZQUIERDA-----------------
         case this.keys.left:
+          this.posAttack = 2
           this.pos = 2
           this.image.frames = 8;
           this.image.src = "./images/runLeft.png";
-          this.posX -= 30
+          this.posX -= this.velX
           document.addEventListener("keyup", e => {
-            if (this.posY == this.posY0) {
+            if (this.pos == 2) {
               this.image.src = "./images/IdleLeft.png";
               this.image.frames = 4;
+              this.pos = 0
+              this.posAttack = 2
             }
           });
           break;
         //MOVIMIENTO DERECHA---------------
         case this.keys.right:
+          this.posAttack = 1
           this.pos = 1
           this.image.frames = 8;
           this.image.src = "./images/RunRigth.png";
-          this.posX += 30
+          this.posX += this.velX
           document.addEventListener("keyup", e => {
-            if (this.posY == this.posY0) {
+            if (this.pos == 1) {
               this.image.src = "./images/IdleRigth.png";
               this.image.frames = 4;
+              this.pos = 0
+              this.posAttack = 1
             }
           });
 
@@ -159,19 +169,30 @@ class Character {
     });
 
   }
-
+  /*collisionBullet(){
+    console.log(this.bullets.posX, " --personaje ")
+    console.log(this.enemies.posX + "---enemigo")
+    if(this.bullets.posX >= this.enemies.posX &&
+    this.mainChar.bullets.posX  <= this.enemies.posX&&
+    this.mainChar.bullets.posY >= this.enemies.posY&&
+    this.mainChar.bullets.posY <= this.enemies.posY)
+        return true
+}*/
   jump() {
     this.posX += this.velX;
     this.posY -= 70;
     this.velY -= 8;
     this.velY += this.gravity;
+    console.log("pacooooooooo", this.obstacles.posY )
     if (this.posY >= this.playerPosY0 + this.playerHeight) {
         this.velY *= -1;
   }
+
   }
   shoot() {
-    this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width, this.height,this.pos));
+    this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width, this.height,this.pos,this.posAttack));
   }
+  
 
   clearBullets() {
     this.bullets = this.bullets.filter(bull => bull.posX <= this.gameWidth);
