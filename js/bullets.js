@@ -1,25 +1,25 @@
 class Bullets{
 
 
-    constructor(ctx,playerPosX,playerPosY,playerPosY0,playerWidth,playerHeight,bulletPos,posAttack){
+    constructor(ctx, playerPosX, playerPosY, playerPosY0, playerWidth, playerHeight, bulletPos, posAttack) {
         this.framesCounter = mainGame.framesCounter;
         this.ctx = ctx;
         this.posX = playerPosX + playerWidth / 2;
-        this.posY = playerPosY + playerHeight /2.7;
+        this.posY = playerPosY + playerHeight / 2.3;
         this.PosXLeft = playerPosX + playerWidth / 2;
         this.playerPosY0 = playerPosY0;
         this.playerHeight = playerHeight;
         this.pos = bulletPos;
         this.radius = 20;
         this.posAttack = posAttack
-        this.velX = 5;
+        this.velX = 8;
         this.velY = 1;
         this.image = new Image();
-        this.image.src = "./images/bulletSingleRight.png";
+        this.image.src = "./images/shuriken.png";
         this.image.frames = 1;
         this.image.framesIndex = 0;
-        this.width = 200
-        this.height = 200
+        this.width = 50
+        this.height = 50
 
     }
     // HACER BALAS ANIMADAAAAAAS
@@ -35,31 +35,29 @@ class Bullets{
             this.posY,
             this.width,
             this.height /// HE CAMBIADO ESTO
-          );
-          this.move(bulletDir)
-      }
-    
-      move() {
-        
-        if (this.posAttack == 1)
-        {
-          this.image.src = "./images/bulletSingleRight.png";
-            this.image.frames = 1;
-          this.posX += this.velX;
-          if (this.posY >= this.playerPosY0 + this.playerHeight) {
-              this.velY *= -1;
-        }
-      }else if (this.posAttack == 2)
-      {
-        
-        this.image.src = "./images/bulletSingleLeft.png";
-        this.image.frames = 1;
-        this.posX -=this.velX
-        if (this.posY >= this.playerPosY0 + this.playerHeight) {
-            this.velY *= -1;
+        );
+        this.move(bulletDir)
     }
-  }
 
-}
+    move() {
+
+        if (this.posAttack == 1) {
+            this.image.src = "./images/shuriken.png";
+            this.image.frames = 1;
+            this.posX += this.velX;
+            if (this.posY >= this.playerPosY0 + this.playerHeight) {
+                this.velY *= -1;
+            }
+        } else if (this.posAttack == 2) {
+
+            this.image.src = "./images/shuriken.png";
+            this.image.frames = 1;
+            this.posX -= this.velX
+            if (this.posY >= this.playerPosY0 + this.playerHeight) {
+                this.velY *= -1;
+            }
+        }
+
+    }
 
 }

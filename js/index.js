@@ -1,6 +1,12 @@
+window.onload = function() {
+    
+    mainGame.init('myCanvas')
+  };
 
-window.onload = () => {
+    
+    
+  
 
-    mainGame.init()
-    mainGame.startGame()
-}
+
+
+

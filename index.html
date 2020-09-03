@@ -1,38 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./styles/style.css">
     <title>Juegasso</title>
 </head>
+
 <body>
     <header>
         <div class="titleMain">
+
             <h1></h1>
+
         </div>
     </header>
     <section>
-        <div class= "canvas-space">
-            <canvas id="myCanvas" width="1200" height="900"></canvas>
-            <img id='welcome-bg' src="./images/bg.png" alt="background"/>
-            <img id='logo' src="./images/logo2.png" alt="logo-juego"/>
-            <img id='start-button' src="./images/play-text.png" alt="start-button"/>
-            <img id='control' src="./images/controles.png" alt="teclas" />
-            <img id='play-again' src="./images/Play Again.png" alt="play-again" />
+        <div class="canvas-space">
+            <canvas id="myCanvas"></canvas>
+            <div>
+                 <!-- <audio id="audio" src="./sounds/music.mp3" autoplay loop></audio>  -->
+                <img id='welcome-bg' src="./images/bg7.jpg" alt="background" />
+                <img id='logo' src="./css-images/titulo.png" alt="logo-juego" />
+                <img id='start-button' src="./css-images/press.png" alt="start-button" />
+                <img id='control' src="./css-images/controles.png" alt="teclas" />
+                <img id='lost' src="./css-images/lost.png" alt="lost" />
+                <img id='won' src="./css-images/won.png" alt="won" />
+                <img id='welcome-bg' src="./images/Walls/lastTree.png" alt="tree" />
+
+                
+            </div>
         </div>
     </section>
-    <script src="./js/character.js"></script>
-    <script src="./js/background.js"></script>
-<script src="./js/obstacles.js"></script>
-<script src="./js/bullets.js"></script>
-<script src="./js/enemy.js"></script>
 
-<script src="./js/game.js"></script>
-<script src="./js/index.js"></script>
+    <script src="./js/background.js"></script>
+    <script src="./js/character.js"></script>
+    <script src="./js/obstacles.js"></script>
+    <script src="./js/enemy.js"></script>
+    <script src="./js/bullets.js"></script>
+    <script src="./js/game.js"></script>
+    <script src="./js/index.js"></script>
 
 </body>
-
 
 
 </html>
