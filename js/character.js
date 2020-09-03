@@ -22,7 +22,7 @@ class Character {
         this.velY = 1;
         this.gravity = 0.4;
         this.velX = 5;
-
+        this.basicAttack = 0, // ataque espadazo
         this.keys = keys;
         this.posAttack = 1,
         this.bullets = [];
@@ -114,22 +114,26 @@ class Character {
                     break;
                     //ATAQUE HACIA LOS DOS LADOS-----------
                 case this.keys.space:
+                    const audioFiu = document.getElementById("fiu")
+                    audioFiu.play()
                     if (this.posAttack == 2) {
                         this.image.frames = 4;
                         this.image.src = "./images/AttackLeft.png";
-                        
+                        this.basicAttack = 1
 
                         break
                     } else if (this.posAttack == 1) {
                         this.image.frames = 4;
                         this.image.src = "./images/AttackRight.png";
-                        
+                        this.basicAttack = 1
 
                         break;
                     }
                     case this.keys.throw:
+                        const audioKnife = document.getElementById("knife")
+                        audioKnife.play()
                     if (this.posAttack == 2) {
-    
+                       
                         this.shoot();
 
                         break
@@ -181,6 +185,8 @@ class Character {
 
     jump() {
         //this.posX += this.velX;
+        const audioJump = document.getElementById("jump")
+          audioJump.play()
         this.posY -= 30;
         this.velY -= 8;
         //this.velY += this.gravity;

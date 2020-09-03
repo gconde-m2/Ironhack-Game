@@ -30,6 +30,7 @@ class Enemy {
         this.afterJump = 0;
         this.pain = 0
         this.state = 0;
+        this.damageDone = 0
     }
 
     draw(framesCounter) {
@@ -53,7 +54,7 @@ class Enemy {
     }
     move() {
 
-        if (this.character.pos == 2) {
+        if (this.character.pos == 2 && this.backPos.backgroundPos.x < 0) {
             this.posX += this.character.velX
         }
         if (this.character.pos == 1) {
@@ -69,12 +70,14 @@ class Enemy {
                 this.posX += 2
                 this.image.frames = 8;
                 this.image.src = "./images/runRigth.png";
-            } else if (this.character.posX < this.posX - 100) {
+            } else if (this.character.posX < this.posX - 50) {
                 this.image.frames = 4;
                 this.image.src = "./images/AttackLeft.png";
-            } else if (this.character.posX > this.posX + 109) {
+                this.damageDone++
+            } else if (this.character.posX > this.posX + 50) {
                 this.image.frames = 4;
                 this.image.src = "./images/AttackRight.png";
+                this.damageDone++
             }
         }
     }
@@ -151,7 +154,7 @@ class LastBoss {
         }
         move() {
     
-            if (this.character.pos == 2) {
+            if (this.character.pos == 2 && this.backPos.backgroundPos.x < 0) {
                 this.posX += this.character.velX
             }
             if (this.character.pos == 1) {
@@ -167,10 +170,10 @@ class LastBoss {
                     this.posX += 2
                     this.image.frames = 8;
                     this.image.src = "./images/boss/Run.png";
-                } else if (this.character.posX < this.posX - 100) {
+                } else if (this.character.posX < this.posX - 50) {
                     this.image.frames = 6;
                     this.image.src = "./images/boss/Attack-left.png";
-                } else if (this.character.posX > this.posX + 109) {
+                } else if (this.character.posX > this.posX + 50) {
                     this.image.frames = 6;
                     this.image.src = "./images/boss/Attack1.png";
                 }

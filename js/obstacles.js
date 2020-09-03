@@ -43,7 +43,7 @@ class Obstacle{
     }
 
     move() {
-        if (this.character.pos == 2) {
+        if (this.character.pos == 2 && this.backPos.backgroundPos.x < 0) {
             this.posX += this.character.velX
         }
         if (this.character.pos == 1) {
