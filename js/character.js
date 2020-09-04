@@ -22,11 +22,11 @@ class Character {
         this.velY = 1;
         this.gravity = 0.4;
         this.velX = 5;
-        this.basicAttack = 0, // ataque espadazo
+        this.basicAttack = 0, 
         this.keys = keys;
         this.posAttack = 1,
         this.bullets = [];
-        this.pos = 0, //cambio direccion imagen bullet
+        this.pos = 0, 
         this.afterJump = 0,
         this.setListeners();
         this.state = 0
@@ -47,11 +47,9 @@ class Character {
         );
 
         this.animate(framesCounter)
-
         this.bullets.forEach(bullet => bullet.draw())
         this.clearBullets()
         this.moveJump()
-
     }
 
     animate(framesCounter) {
@@ -64,11 +62,10 @@ class Character {
     }
 
     moveJump() {
-        if (this.posY <= this.posY0) { // 22 40 he cambiando el =
+        if (this.posY <= this.posY0) { 
             this.posY += this.velY;
             this.velY += this.gravity;
         } else {
-            //this.posY = this.posY0;
             this.velY = 1;
         }
     }
@@ -87,14 +84,8 @@ class Character {
                             this.image.frames = 2;
                             this.image.src = "./images/JumpLeft.png";
                             this.jump();
-                            document.addEventListener("keypress", e => {
-
-                                //this.posX -= this.velX;
-                                //this.posX -= 30
-                            })
 
                         } else if (this.pos == 1) {
-                            //this.posX += this.velX;
                             this.image.frames = 2;
                             this.image.src = "./images/JumpRight.png"
                             this.jump()
@@ -133,14 +124,10 @@ class Character {
                         const audioKnife = document.getElementById("knife")
                         audioKnife.play()
                     if (this.posAttack == 2) {
-                       
                         this.shoot();
-
                         break
                     } else if (this.posAttack == 1) {
-    
                         this.shoot();
-
                         break;
                     }
 
@@ -166,7 +153,6 @@ class Character {
                         this.pos = 1
                         this.image.frames = 8;
                         this.image.src = "./images/RunRigth.png";
-                        //this.posX += this.velX
                         document.addEventListener("keyup", e => {
                             if (this.pos == 1) {
                                 this.image.src = "./images/IdleRigth.png";
@@ -175,21 +161,16 @@ class Character {
                                 this.posAttack = 1
                             }
                         });
-
                         break
-
             }
         });
-
     }
 
     jump() {
-        //this.posX += this.velX;
         const audioJump = document.getElementById("jump")
           audioJump.play()
         this.posY -= 30;
         this.velY -= 8;
-        //this.velY += this.gravity;
         this.isJumping = true
         if (this.posY >= this.playerPosY0 + this.playerHeight) {
             this.velY *= -1;
@@ -199,7 +180,6 @@ class Character {
     shoot() {
         this.bullets.push(new Bullets(this.ctx, this.posX, this.posY, this.posY0, this.width, this.height, this.pos, this.posAttack));
     }
-
 
     clearBullets() {
         this.bullets = this.bullets.filter(bull => bull.posX <= this.gameWidth);

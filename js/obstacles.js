@@ -36,10 +36,8 @@ class Obstacle{
             this.posY + 200,
             this.width,
             this.height
-        );
-
+        )
         this.move()
-        
     }
 
     move() {
@@ -49,7 +47,6 @@ class Obstacle{
         if (this.character.pos == 1) {
             this.posX -= this.character.velX
         }
-
     }
- 
+
 }

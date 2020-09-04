@@ -26,7 +26,7 @@ class Enemy {
         this.lives = 4
         this.posAttack = 0
         this.bullets = [];
-        this.pos = 0; //cambio direccion imagen bullet
+        this.pos = 0; 
         this.afterJump = 0;
         this.pain = 0
         this.state = 0;
@@ -90,13 +90,6 @@ class Enemy {
         }
 
     }
-    damage() {
-
-
-
-    }
-
-    
 }
 
 class LastBoss {
@@ -127,7 +120,7 @@ class LastBoss {
             this.lives = 10
             this.posAttack = 0
             this.bullets = [];
-            this.pos = 0; //cambio direccion imagen bullet
+            this.pos = 0;
             this.afterJump = 0;
             this.pain = 0
             this.state = 0;
@@ -152,8 +145,8 @@ class LastBoss {
             this.move()
     
         }
+        
         move() {
-    
             if (this.character.pos == 2 && this.backPos.backgroundPos.x < 0) {
                 this.posX += this.character.velX
             }
@@ -179,6 +172,7 @@ class LastBoss {
                 }
             }
         }
+
         animate(framesCounter) {
             if (framesCounter % 5 == 0) {
                 this.image.framesIndex++;
@@ -186,9 +180,6 @@ class LastBoss {
             if (this.image.framesIndex > this.image.frames - 1) {
                 this.image.framesIndex = 0;
             }
-    
         }
-        
-
     }
     

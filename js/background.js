@@ -13,26 +13,25 @@ class Background {
         this.backgroundSpeed = 1
         this.char = character
     }
+
     draw() {
         this.move()
         this.ctx.drawImage(this.backgroundImg, this.backgroundPos.x, this.backgroundPos.y, this.backgroundWidth, this.backgroundHeight);
         this.ctx.drawImage(this.backgroundImg, this.backgroundPos.x + this.backgroundWidth, this.backgroundPos.y, this.backgroundWidth, this.backgroundHeight);
         
     }
+
     move() {
         if (this.char.pos != 0)
         {
         if ( this.char.pos == 1 )
             this.backgroundPos.x <= -this.backgroundWidth ? this.backgroundPos.x = 0 : this.backgroundPos.x -= this.char.velX 
         else if ( this.char.pos == 2 && this.backgroundPos.x < 0 )
-        this.backgroundPos.x <= -this.backgroundWidth ? this.backgroundPos.x = 0 : this.backgroundPos.x += this.char.velX 
-        }else if (this.backgroundPos.x > 0 && this.char.pos == 2)
-        {
-
-           this.char.velX = 0
-        }
-    
+            this.backgroundPos.x <= -this.backgroundWidth ? this.backgroundPos.x = 0 : this.backgroundPos.x += this.char.velX 
+        } else if (this.backgroundPos.x > 0 && this.char.pos == 2)
+            this.char.velX = 0
     } 
+
     lives(){
         const image = new Image();
         image.src = "./images/life.png";
@@ -44,7 +43,6 @@ class Background {
         this.livesH.pop
     }
 }
-
 
 class BackgroundTwo {
     constructor(ctx, w, h, img,character) {
@@ -60,11 +58,13 @@ class BackgroundTwo {
         this.backgroundSpeed = 1
         this.char = character
     }
+    
     draw() {
         this.move()
         this.ctx.drawImage(this.backgroundImg, this.backgroundPos.x, this.backgroundPos.y, this.backgroundWidth, this.backgroundHeight);
         this.ctx.drawImage(this.backgroundImg, this.backgroundPos.x + this.backgroundWidth, this.backgroundPos.y, this.backgroundWidth, this.backgroundHeight);
     }
+
     move() {
         if (this.char.pos != 0)
         {
@@ -95,13 +95,7 @@ class Lives {
         this.char = character
     }
     draw() {
-        
+
             this.ctx.drawImage(this.livesImg, this.w, this.h, 100, 100)
-   
-    }
-    lives(){
-    
-        
-       
     }
 }

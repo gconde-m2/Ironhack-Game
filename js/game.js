@@ -1,11 +1,11 @@
 
 const mainGame = {
 
-    name: 'Space Ironhackers',
+    name: 'Jungle Ninja',
     author: 'Belén Olias Ericsson y Guillermo Conde Magaña',
     version: '1.0.0',
     license: undefined,
-    description: 'The best game u gonna play in ya life ',
+    description: 'Ninja platform game --Alpha ',
     images : undefined,
     canvasId: undefined,
     ctx: undefined,
@@ -35,8 +35,8 @@ const mainGame = {
         enter: 13,
         throw: 67
     },
-    dolor: 0, // cacaaaaa
-
+    dolor: 0, 
+    loadGame:0,
 
 
     init() {
@@ -72,23 +72,19 @@ const mainGame = {
 
 
     },
-    tree() {
-        /* this.image = new Image();
-         this.image.src = "./images/Walls/stone.png";
- */
-
-    },
 
     setEvent() {
 
 
         window.addEventListener("keydown", e => {
+            if(this.loadGame == 0){
             switch (e.keyCode) {
+            
                 case this.keys.enter:
                     this.startGame()
-
                     break;
             }
+        }
         })
     },
 
@@ -119,7 +115,7 @@ const mainGame = {
             this.collisionBulletsBoss()
 
             this.clearObstacles()
-            this.clearLives()
+
             this.collisionLastBoss() ? this.lives-- && this.background.livesH.pop() : null
 
             this.collisionObstacles() ? this.collision() : null
@@ -132,6 +128,8 @@ const mainGame = {
 
             this.lives <= 0 ? this.gameOver() && audio.pause() : null
 
+            this.loadGame = 1
+
         }, 1000 / this.FPS)
     },
 
@@ -140,12 +138,10 @@ const mainGame = {
         this.background = new Background(this.ctx, this.canvasSize.w, this.canvasSize.h, "./images/bg7.jpg", this.mainChar)
         this.liveHeart.push(new Lives(this.ctx, 50, 100, "./images/life.png", this.mainChar))
         this.liveHeart.push(new Lives(this.ctx, 100, 100, "./images/life.png", this.mainChar))
-        this.liveHeart.push(new Lives(this.ctx, 150, 100, "./images/life.png", this.mainChar)) //--------------------------
+        this.liveHeart.push(new Lives(this.ctx, 150, 100, "./images/life.png", this.mainChar)) 
         this.backgroundTwo =  new BackgroundTwo(this.ctx, this.canvasSize.w, this.canvasSize.h, "./images/newBg/Ground.png", this.mainChar)
         this.lastBoss = new LastBoss(this.ctx, this.canvasSize.w, this.canvasSize.h, this.background, this.mainChar)
-        //this.obstacles = new Obstacle(this.ctx, this.canvasSize.w, this.canvasSize.h, this.background, this.mainChar)
         this.obstacles.push(new Obstacle(this.ctx, this.canvasSize.w, this.canvasSize.h, this.background, this.mainChar))
-        //this.enemies.push(new Enemy(this.ctx, this.canvasSize.w, this.canvasSize.h, this.background, this.mainChar)) 
 
         this.lives = 3
     },
@@ -155,7 +151,7 @@ const mainGame = {
         this.background.draw()
         this.mainChar.draw(this.frames)
         this.enemies.forEach(elm => elm.draw(this.frames))
-        this.liveHeart.forEach(elm => elm.draw()) //-------------------------------
+        this.liveHeart.forEach(elm => elm.draw()) 
         this.obstacles.forEach(elm => elm.draw())
         this.backgroundTwo.draw()
 
@@ -166,11 +162,6 @@ const mainGame = {
     },
     clearObstacles() {
         this.obstacles = this.obstacles.filter(elm => elm.posX <= 1200 && elm.posX + elm.width >= 0)
-
-    },
-    clearLives(){
-        //this.background.lives[this.background.lives.length - 1]
-        //this.background.lives = this.background.lives.pop()
 
     },
 
@@ -239,26 +230,24 @@ const mainGame = {
 
         this.enemies.forEach(elm => {
 
-
-            console.log(this.mainChar.posX)
             if (this.mainChar.posX >= elm.posX - 1 &&
                 this.mainChar.posX <= elm.posX + 1) {
 
                 flag = true
-
             }
         })
         return flag
 
     },
-    collisionSword(){
-
-    },
 
     collisionLastBoss() {
 
-        if (this.mainChar.posX >= this.lastBoss.posX - 1 &&
-            this.mainChar.posX <= this.lastBoss.posX + 1) {
+        if (this.mainChar.posX >= this.lastBoss.posX - 2 &&
+            this.mainChar.posX <= this.lastBoss.posX + 2) {
+           
+            const audioPain = document.getElementById("pain")
+            audioPain.play()
+            this.liveHeart.pop()
             return true
         }
     },
@@ -274,13 +263,7 @@ const mainGame = {
                 const audioPain = document.getElementById("pain")
                 audioPain.play()
 
-                        this.liveHeart.pop()
-                   
-                    
-
-              
-
-                
+                        this.liveHeart.pop()  
             }
         })
         return flag
@@ -310,6 +293,7 @@ const mainGame = {
 
         return flag
     },
+    
     collisionBullet() {
 
         let flag = false
@@ -327,14 +311,11 @@ const mainGame = {
                     const audioEnemydie = document.getElementById("enemyDie")
                     audioEnemydie.play()
                 }
-
             })
-
         })
-
         return flag
-
     },
+
     collisionObstacles() {
 
         let flag = false
@@ -348,6 +329,7 @@ const mainGame = {
         })
         return flag
     },
+
     gameOver() {
         
           audio.pause()
@@ -371,7 +353,6 @@ const mainGame = {
             switch (e.keyCode) {
                 case this.keys.enter:
                     location.reload();
-
                     break;
             }
         })
@@ -400,7 +381,6 @@ const mainGame = {
             switch (e.keyCode) {
                 case this.keys.enter:
                     location.reload();
-
                     break;
             }
         })

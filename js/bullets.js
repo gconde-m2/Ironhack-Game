@@ -1,6 +1,4 @@
 class Bullets{
-
-
     constructor(ctx, playerPosX, playerPosY, playerPosY0, playerWidth, playerHeight, bulletPos, posAttack) {
         this.framesCounter = mainGame.framesCounter;
         this.ctx = ctx;
@@ -22,7 +20,6 @@ class Bullets{
         this.height = 50
 
     }
-    // HACER BALAS ANIMADAAAAAAS
     draw(bulletDir) {
 
         this.ctx.drawImage(
@@ -34,11 +31,10 @@ class Bullets{
             this.posX,
             this.posY,
             this.width,
-            this.height /// HE CAMBIADO ESTO
+            this.height 
         );
         this.move(bulletDir)
     }
-
     move() {
 
         if (this.posAttack == 1) {
@@ -57,7 +53,6 @@ class Bullets{
                 this.velY *= -1;
             }
         }
-
     }
 
 }
