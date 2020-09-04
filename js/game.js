@@ -282,7 +282,8 @@ const mainGame = {
 
         this.mainChar.bullets.forEach(bullet => {
 
-            if (bullet.posX + bullet.width - 240 >= this.lastBoss.posX && bullet.posX <= this.lastBoss.posX + this.lastBoss.width) {
+            if (bullet.posX + bullet.width - 240 >= this.lastBoss.posX && bullet.posX <= this.lastBoss.posX + this.lastBoss.width - 240
+                    && bullet.posY - bullet.height >= this.lastBoss.posY + 100 && bullet.posY - 100 <= this.lastBoss.posY + this.lastBoss.height) {
                 this.mainChar.bullets = this.mainChar.bullets.filter(elm => elm !== bullet)
                 this.lastBoss.lives--
                 const audioPain = document.getElementById("pain")
@@ -293,7 +294,7 @@ const mainGame = {
 
         return flag
     },
-    
+
     collisionBullet() {
 
         let flag = false
