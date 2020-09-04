@@ -1,3 +1,7 @@
+JUNGLE NINJA
+
+![alt text](https://github.com/gconde-m2/Ironhack-Game/presentacion.png)
+
 - Autores: Belén Olias Ericsson y Guillermo Conde Magaña
 
 - Nombre del juego: "Jungle Ninja"
